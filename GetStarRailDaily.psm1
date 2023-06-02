@@ -1,12 +1,12 @@
-Function Get-GenshinDaily {
+Function Get-StarRailDaily {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true, Position=0)]
+        [Parameter(Mandatory = $true, Position = 0)]
         [Int]$UserId,
-        [Parameter(Mandatory=$true, Position=1)]
+        [Parameter(Mandatory = $true, Position = 1)]
         [String]$Token
     )
-    $Url = "https://hk4e-api-os.mihoyo.com/event/sol/sign?act_id=e202102251931481"
+    $Url = "https://sg-public-api.hoyolab.com/event/luna/os/sign?act_id=e202303301540311"
     $Iwr = Invoke-WebRequest -Uri $Url -Method Post -Headers @{ Cookie = "ltuid=$UserId; ltoken=$Token" }
     # Get response
     $json = $Iwr.Content | ConvertFrom-Json
@@ -20,26 +20,26 @@ Function Get-GenshinDaily {
     }
     <#
     .SYNOPSIS
-    Get Genshin Daily Reward from HoyoLab
+    Get Star Rail Daily Reward from HoyoLab
     .DESCRIPTION
-    Get Genshin Daily Reward from HoyoLab. This function will return a message from the response.
+    Get Star Rail Daily Reward from HoyoLab. This function will return a message from the response.
     .PARAMETER UserId
     User ID from HoyoLab. You can grab this from your browser's cookie in Hoyolab: `ltuid`
     .PARAMETER Token
     Token from HoyoLab. You can grab this from your browser's cookie in Hoyolab: `ltoken`
     .EXAMPLE
-    Get-GenshinDaily -UserId 123456789 -Token 123456789
+    Get-StarRailDaily -UserId 123456789 -Token 123456789
     .EXAMPLE
     ggd -UserId 123456789 -Token 123456789
     .EXAMPLE
     daily -UserId 123456789 -Token 123456789
     .LINK
-    https://github.com/nattadasu/GetGenshinDaily
+    https://github.com/qqii/GetStarRailDaily
     #>
 }
 
-Set-Alias -Name ggd -Value Get-GenshinDaily
-Set-Alias -Name daily -Value Get-GenshinDaily
+Set-Alias -Name gsrd -Value Get-StarRailDaily
+Set-Alias -Name daily -Value Get-StarRailDaily
 
 # Export func and aliases
-Export-ModuleMember -Function Get-GenshinDaily -Alias ggd, daily
+Export-ModuleMember -Function GetStarRailDaily -Alias ggd, daily

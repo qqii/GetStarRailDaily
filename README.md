@@ -1,28 +1,28 @@
 <!-- omit in toc -->
-# Genshin Impact Daily Login Claimer
+Star Rail Daily Login Claimer
 
-*Claim your daily login rewards for [Genshin Impact](https://genshin.hoyoverse.com/en/) from [Hoyolab](https://hoyolab.com) via PowerShell command!*
+*Claim your daily login rewards for [Genshin Impact](https://hsr.hoyoverse.com/en/) from [Hoyolab](https://hoyolab.com) via PowerShell command!*
 
 <!-- Also, this module is powered by GitHub Copilot -->
 
 <!-- omit in toc -->
 ## Table of Contents
 
-* [About](#about)
-* [Warranty and Liability Notice](#warranty-and-liability-notice)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installing](#installing)
-* [Parameters](#parameters)
-  * [UserID](#userid)
-  * [Token](#token)
-* [Examples](#examples)
-* [Aliases](#aliases)
-* [License](#license)
+- [About](#about)
+- [Warranty and Liability Notice](#warranty-and-liability-notice)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installing](#installing)
+- [Parameters](#parameters)
+  - [UserID](#userid)
+  - [Token](#token)
+- [Examples](#examples)
+- [Aliases](#aliases)
+- [License](#license)
 
 ## About
 
-Get Genshin Daily Reward from HoyoLab. This function will return a message from the response.
+Get Star Rail Daily Reward from HoyoLab. This function will return a message from the response.
 
 ## Warranty and Liability Notice
 
@@ -53,13 +53,13 @@ Install-Module -Name InstallModuleFromGitHub
 You can install the module via `Install-ModuleFromGitHub` command (`sudo` may be required for Linux and macOS or run PowerShell as Administrator for Windows):
 
 ```powershell
-Install-ModuleFromGitHub -GitHubRepo nattadasu/GetGenshinDaily
+Install-ModuleFromGitHub -GitHubRepo qqii/GetStarRailDaily
 ```
 
 To instal the module without root/administrator permission, you can use `-Scope CurrentUser` parameter:
 
 ```powershell
-Install-ModuleFromGitHub -GitHubRepo nattadasu/GetGenshinDaily -Scope CurrentUser
+Install-ModuleFromGitHub -GitHubRepo qqii/GetStarRailDaily -Scope CurrentUser
 ```
 
 ## Parameters
@@ -102,16 +102,16 @@ Get-GenshinDaily -UserID 123456789 -Token 123456789
 
 ## Aliases
 
-This module has aliases for `Get-GenshinDaily` command:
+This module has aliases for `Get-StarRailDaily` command:
 
-`ggd`, `daily`
+`gsrd`, `daily`
 
 To add aliases to your PowerShell session, modify your `$PROFILE` file:
 
 ```powershell
 # Add aliases to your PowerShell session
-Set-Alias -Name ggd -Value Get-GenshinDaily
-#               ^^^
+Set-Alias -Name gsrd -Value Get-StarRailDaily
+#               ^^^^
 #               Alias name
 ```
 
