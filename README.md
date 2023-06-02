@@ -37,30 +37,24 @@ I'll walk you through it step by step.
 
 ![PowerShell Core in the start menu](./res/start_menu_powershell_core.png)
 
-1. Install this script by typing:
+3. Type `New-Item -Type File -Force $PROFILE && explorer.exe $PROFILE` into your
+   PowerShell Core window and press enter. Magically Notepad will appear.
+   _Spooky!_
+4. Copy and paste the contents of [`GetStarRailDaily.ps1`](./GetStarRailDaily.ps1)
+   into the Notepad window.
 
-```powershell
-Install-Module -Name InstallModuleFromGitHub
-Install-ModuleFromGitHub -GitHubRepo qqii/GetStarRailDaily -Scope CurrentUser
-```
-
-You'll need to press "Y" when it tells you to. There'll be some fancy text and
-progress bars, but don't worry about that. It's just the script installing.
+Don't close the Notepad window yet! We'll need to configure the script first.
+You can close the PowerShell window though. We won't need it for a while.
 
 ### Prerequisites (Configure)
 
-Now that you've got the script installed, we'll need to give it something called
-a cookie. This is a magical ingredient that allows the script to log in to your
-account. Make sure to keep it secret and ABSOLUTELY do not share it with anyone!
-I'm serious. Don't do it.
+Now that you've got the script, we'll need to give it something called a cookie.
+This is a magical ingredient that allows the script to log in to your account.
+Make sure to keep it secret and ABSOLUTELY do not share it with anyone! I'm
+serious. Don't do it.
 
-Before we get your cookie, we'll need to setup the script. I'll hold you hand
-the whole way, but I'll spare you the technical details.  
-
-1. Type `New-Item -Type File -Force $PROFILE && explorer.exe $PROFILE` into your
-   PowerShell Core window and press enter. Magically Notepad will appear.
-   _Spooky!_
-2. In the document, copy and paste the following incantation:
+Before we get your cookie, we'll need to add some of your own magical
+incantations to the end of the spell (file).
 
 ```powershell
 function daily {
@@ -74,9 +68,9 @@ function daily {
 
 It's not ready yet, so we'll need to get some ingredients.
 
-3. Go to [HoYoLAB](http://hoyolab.com) and log in to your account.
-4. Press `F12` to open Developer Tools. _Ooooh, spooky hacker stuff!_
-5. Type `copy(document.cookie)` into the console and press enter.
+1. Go to [HoYoLAB](http://hoyolab.com) and log in to your account.
+2. Press `F12` to open Developer Tools. _Ooooh, spooky hacker stuff!_
+3. Type `copy(document.cookie)` into the console and press enter.
    It should say "String was copied to clipboard.", but if it doesn't try typing
    `document.cookie` and copy everything between the quotation marks.
 
@@ -91,7 +85,7 @@ It's not ready yet, so we'll need to get some ingredients.
 8. Copy and paste the user agent into the document, replacing `<useragent>`.
    Once again, don't you date touch those quotes
 
-Your notepad document should now look something like this:
+Your notepad document should end with something like this:
 
 ```powershell
 function daily {
@@ -105,8 +99,8 @@ function daily {
 
 9. Save and close the file. _If you're a 1337 hax0r like me you can press
    `Ctrl+S` and then `Alt+F4`._
-10. Finally, close the PowerShell window so we finish clean, as good magicians
-    do.
+10. If you haven't already, close that PowerShell window so we finish clean, as
+    good magicians do. _(This step is important.)_
 
 Well that was something. The runic incantations have been prepared and are
 awaiting the magic incantation. Before that, let's take a break and admire our

@@ -75,6 +75,3 @@ function Get-StarRailDaily {
     https://github.com/qqii/GetStarRailDaily
     #>
 }
-
-# Export function
-Export-ModuleMember -Function GetStarRailDaily
