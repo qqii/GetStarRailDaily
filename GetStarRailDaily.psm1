@@ -1,45 +1,80 @@
-Function Get-StarRailDaily {
+function Get-StarRailDaily {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
-        [Int]$UserId,
-        [Parameter(Mandatory = $true, Position = 1)]
-        [String]$Token
+        [String]$Cookie,
+        [Parameter(Position = 1)]
+        [String]$UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0"
     )
-    $Url = "https://sg-public-api.hoyolab.com/event/luna/os/sign?act_id=e202303301540311"
-    $Iwr = Invoke-WebRequest -Uri $Url -Method Post -Headers @{ Cookie = "ltuid=$UserId; ltoken=$Token" }
-    # Get response
-    $json = $Iwr.Content | ConvertFrom-Json
-    # Export message from $json.message
-    Switch ($json.retcode) {
-        "0" { Write-Output $json.data.message }
-        "-100" { Write-Error "Token expired, not logged in, or auth error" }
-        "-5003" { Write-Error "You have already signed in today" }
-        "-10001" { Write-Error "Invalid request" }
-        Default { Write-Error "Unknown error: $($json.retcode) $($json.message)" }
+    $Headers = @{
+        "Cookie"          = $Cookie
+        "Accept-Encoding" = "gzip, deflate, br"
+        "Referer"         = "https://act.hoyolab.com"
     }
+
+    $ActId = "e202303301540311"
+    $InfoUrl = "https://sg-public-api.hoyolab.com/event/luna/os/info?act_id=${ActId}"
+    $RewardUrl = "https://sg-public-api.hoyolab.com/event/luna/os/home?act_id=${ActId}"
+    $SignUrl = "https://sg-public-api.hoyolab.com/event/luna/os/sign?act_id=${ActId}"
+
+    $Info = Invoke-RestMethod -Method Get -Uri $InfoUrl `
+        -UserAgent $UserAgent `
+        -Headers $Headers
+
+    if ($Info.retcode -ne 0) {
+        Write-Error "Error: $($Info.retcode) $($Info.message)"
+        Write-Error "Try to update your cookie and user agent."
+        return
+    }
+
+    $Rewards = (Invoke-RestMethod -Method Get -Uri $RewardUrl `
+            -UserAgent $UserAgent `
+            -Headers $Headers).data.awards
+
+    $CheckIn = Invoke-RestMethod -Method Post -Uri $SignUrl `
+        -UserAgent $UserAgent `
+        -Headers $Headers
+
+    $Reward = $Rewards[$Info.data.total_sign_day - 1]
+    $Claimed = "You claimed: $($Reward.name) x$($Reward.count)"
+    $Streak = "Your streak is: $($Info.data.total_sign_day)"
+
+    switch ($CheckIn.retcode) {
+        "0" {
+            Write-Output "Check in successful!"
+            Write-Output $Claimed
+            Write-Output $Streak
+        }
+        "-5003" {
+            Write-Warning "You have already checked in in today."
+            Write-Warning $Claimed
+            Write-Warning $Streak
+        }
+        Default {
+            Write-Error "Error: $($Info.retcode) $($Info.message)"
+            Write-Error "Try to update your cookie and user agent."
+        }
+    }
+
+    return $CheckIn
+
     <#
     .SYNOPSIS
     Get Star Rail Daily Reward from HoyoLab
     .DESCRIPTION
-    Get Star Rail Daily Reward from HoyoLab. This function will return a message from the response.
-    .PARAMETER UserId
-    User ID from HoyoLab. You can grab this from your browser's cookie in Hoyolab: `ltuid`
-    .PARAMETER Token
-    Token from HoyoLab. You can grab this from your browser's cookie in Hoyolab: `ltoken`
+    Get Star Rail Daily Reward from HoyoLab. This function will return the
+    response from checking in.
+    .PARAMETER Cookie
+    Cookie from Hoyolab. This must include `ltoken` and `ltuid`.
+    .PARAMETER UserAgent
+    Browser user agent. This will default to Firefox 113.0, but it is
+    reccomended to set this to your own browser.
     .EXAMPLE
-    Get-StarRailDaily -UserId 123456789 -Token 123456789
-    .EXAMPLE
-    ggd -UserId 123456789 -Token 123456789
-    .EXAMPLE
-    daily -UserId 123456789 -Token 123456789
+    Get-StarRailDaily -Cookie "ltoken=qmzEqFTK4SLUs9kz7FjHFMYxlea2jzwHzSGxOl4D; ltuid=331575279" -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0"
     .LINK
     https://github.com/qqii/GetStarRailDaily
     #>
 }
 
-Set-Alias -Name gsrd -Value Get-StarRailDaily
-Set-Alias -Name daily -Value Get-StarRailDaily
-
-# Export func and aliases
-Export-ModuleMember -Function GetStarRailDaily -Alias ggd, daily
+# Export function
+Export-ModuleMember -Function GetStarRailDaily
