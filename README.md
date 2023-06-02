@@ -1,7 +1,7 @@
 <!-- omit in toc -->
 # Star Rail Daily Login Claimer
 
-*Claim your daily login rewards for [Star Rail](https://hsr.hoyoverse.com/en/) from [Hoyolab](https://hoyolab.com) via PowerShell!*
+*Claim your daily login rewards for [Star Rail](https://hsr.hoyoverse.com/en/) from [HoYoLAB](https://hoyolab.com) via PowerShell!*
 
 <!-- omit in toc -->
 ## Table of Contents
@@ -15,8 +15,8 @@
 
 ## About
 
-Tired of having to open the browser, navigate to Hoyolab and click the claim
-button every day? This PowerShell module will save you literally seconds of your
+Tired of having to open the browser, navigate to HoYoLAB and click the claim
+button every day? This PowerShell script will save you literally seconds of your
 life!
 
 ## Getting Started
@@ -26,9 +26,6 @@ need to follow some instructions. Afterwards you'll have to use the spooky
 hacker command line interface. Don't worry, it's not that scary.
 
 ### Prerequisites (Install)
-
-You'll need to install PowerShell Core and a module from PSGallery. Don't worry,
-I'll walk you through it step by step.
 
 1. Install PowerShell Core. Microsoft have pretty decent instructions
    [here](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3)
