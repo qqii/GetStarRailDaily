@@ -28,13 +28,15 @@ hacker command line interface. Don't worry, it's not that scary.
 ### Prerequisites (Install)
 
 1. Install PowerShell Core. Microsoft have pretty decent instructions
-   [here](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3)
+   [here](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3).
 2. Open PowerShell Core. You can find this in the start menu by searching for
    `pwsh`. It should look like this:  
 
-![PowerShell Core in the start menu](./res/start_menu_powershell_core.png)
+<p align="center">
+  <img src="./res/start_menu_powershell_core.png" alt="Opening powershell core via the start menu">
+</p>
 
-3. Type `New-Item -Type File -Force $PROFILE && explorer.exe $PROFILE` into your
+3. Copy `New-Item -Type File -Force $PROFILE && explorer.exe $PROFILE` into your
    PowerShell Core window and press enter. Magically Notepad will appear.
    _Spooky!_
 4. Copy and paste the contents of [`GetStarRailDaily.ps1`](./GetStarRailDaily.ps1)
@@ -57,13 +59,14 @@ incantations to the end of the spell (file).
 function daily {
     $_ = Get-StarRailDaily `
     -Cookie "<cookie>" `
-    -UserAgent "<useragent>"
+    -UserAgent "<user agent>"
 
     return
 }
 ```
 
-It's not ready yet, so we'll need to get some ingredients.
+It's not ready yet, so we'll need to get two ingredients. The cooking and the
+user agent.
 
 1. Go to [HoYoLAB](http://hoyolab.com) and log in to your account.
 2. Press `F12` to open Developer Tools. _Ooooh, spooky hacker stuff!_
@@ -71,15 +74,19 @@ It's not ready yet, so we'll need to get some ingredients.
    It should say "String was copied to clipboard.", but if it doesn't try typing
    `document.cookie` and copy everything between the quotation marks.
 
-![Getting hoyolab cookies from the console](./res/hoyolab_cookies.png)
+<p align="center">
+  <img src="./res/hoyolab_cookies.png" alt="Getting the HoYoLAB cookies from your browser, using the developer tools">
+</p>
 
-6. Replace the `<cookie>` part of the document we opened in Notepad. Leave the
+4. Replace the `<cookie>` part of the document we opened in Notepad. Leave the
    quotes.
-7. [Google "my user agent" (or click me!)](https://www.google.com/search?q=my%20user%20agent)
+5. [Google "my user agent" (or click me!)](https://www.google.com/search?q=my%20user%20agent)
 
-![Google my user agent](./res/google_user_agent.png)
+<p align="center">
+  <img src="./res/google_user_agent.png" alt="Google search of my user agent">
+</p>
 
-8. Copy and paste the user agent into the document, replacing `<useragent>`.
+6. Copy and paste the user agent into the document, replacing `<user agent>`.
    Once again, don't you date touch those quotes
 
 Your notepad document should end with something like this:
@@ -94,9 +101,9 @@ function daily {
 }
 ```
 
-9. Save and close the file. _If you're a 1337 hax0r like me you can press
+7. Save and close the file. _If you're a 1337 hax0r like me you can press
    `Ctrl+S` and then `Alt+F4`._
-10. If you haven't already, close that PowerShell window so we finish clean, as
+8. If you haven't already, close that PowerShell window so we finish clean, as
     good magicians do. _(This step is important.)_
 
 Well that was something. The runic incantations have been prepared and are
